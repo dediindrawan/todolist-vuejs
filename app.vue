@@ -1,13 +1,13 @@
 <template>
   <div class="container-fluid">
     <h1 v-html="rawHtml"></h1>
-    <p v-if="!isCreating" class="notif">Belum ada task</p>
-    <p v-else-if="!titleValue || !descriptionValue">Buat task baru</p>
+    <p v-if="!isCreating && tasks.length == 1">Belum ada task</p>
+    <p v-else-if="!titleValue && !descriptionValue">Buat task baru</p>
 
-    <div v-for="task of tasks" :key="task.id" class="task-list d-flex">
+    <div v-for="task of tasks" :key="task.id" class="task-list d-flex align-items-center mb-3">
       <input v-if="task.title || task.description" :checked="tasks[0].isDone" @change="checkTask(task)" type="checkbox" name="status" />
 
-      <div class="list-wrapper col-md-12 ml-3 mb-3">
+      <div class="list-wrapper col-md-12 ml-3">
         <div :class="{ 'task-title': true, completed: task.isDone }">
           <strong>{{ task.title }}</strong>
         </div>
@@ -37,7 +37,6 @@ export default {
   data() {
     return {
       rawHtml: 'Todo List',
-      clearNotif: ' ',
       tasks: [
         {
           isDone: false,
@@ -74,5 +73,8 @@ export default {
   text-decoration: line-through;
   font-style: italic;
   color: grey;
+}
+.list-wrapper {
+  background-color: rgba(102, 104, 109, 0.1);
 }
 </style>
