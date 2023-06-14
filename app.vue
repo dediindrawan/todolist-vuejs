@@ -1,7 +1,10 @@
 <template>
+<!-- wrapper container start -->
   <div class="item-task m-4">
+  
     <!-- task group container start -->
     <div class="container m-auto">
+    
       <!-- title and notif -->
       <h1 v-html="rawHtml" class="mb-4"></h1>
       <p class="text-muted" v-if="isCreating && tasks.length == 1">{{ notif }}</p>
@@ -40,9 +43,12 @@
           </div>
         </div>
       </div>
+      
     </div>
     <!-- task group container end -->
+    
   </div>
+  <!-- wrapper container end -->
 </template>
 
 <script>
@@ -74,6 +80,7 @@ export default {
         isDone: false,
       });
     },
+    // delete task
     deleteTask(index) {
       const taskIndex = this.tasks.findIndex((task) => task.id === index);
 
@@ -81,6 +88,7 @@ export default {
         this.tasks.splice(taskIndex, 1);
       }
     },
+     // check task
     checkTask(index) {
       const taskIndex = this.tasks.findIndex((task) => task.id === index);
 
@@ -101,6 +109,7 @@ export default {
 textarea {
   resize: none;
 }
+/* add new class isCompleted for list element when checkbox change is active */
 .isCompleted {
   font-style: italic;
   text-decoration: line-through;
