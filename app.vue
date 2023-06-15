@@ -7,8 +7,8 @@
     
       <!-- title and notif -->
       <h1 v-html="rawHtml" class="mb-4"></h1>
-      <p class="text-muted" v-if="isCreating && tasks.length == 1">{{ notif }}</p>
-      <p class="text-muted" v-else-if="!isCreating && tasks.length == 1">Buat task baru</p>
+      <p class="text-muted" v-if="!isCreating && tasks.length == 1">{{ notif }}</p>
+      <p class="text-muted" v-else-if="isCreating && tasks.length == 1">Buat task baru</p>
 
       <!-- task list -->
       <div v-for="task of tasks" :key="task.id" class="task-list">
@@ -28,7 +28,7 @@
 
       <!-- action control areas -->
       <div class="action d-flex justify-content-between">
-        <a href="#" class="add-button" v-if="isCreating" @click="isCreating = !isCreating">Add Task</a>
+        <a href="#" class="add-button" v-if="!isCreating" @click="isCreating = !isCreating">Add Task</a>
 
         <div class="add-card col-md-8 px-0" v-else>
           <div class="card border-0 mb-2">
@@ -79,6 +79,9 @@ export default {
         description: this.descriptionValue,
         isDone: false,
       });
+      // clear columns after saveTask are running
+      this.titleValue = '';
+      this.descriptionValue = '';
     },
     // delete task
     deleteTask(index) {
